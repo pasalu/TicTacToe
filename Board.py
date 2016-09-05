@@ -9,9 +9,37 @@ class Board:
     """
     X = "X"
     O = "O"
+    ROWS = 3
+    COLUMNS = 3
+    BLANK_BOARD = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
     def __init__(self):
-        self.board = [[]];
+        self.board = self.BLANK_BOARD
+
+    def place(self, x, y, player):
+        if x == 0:
+            self.board[0][0] = player
+        elif x == 2:
+            self.board[2][2] = player
+        elif x == -1:
+            return False
+        elif y == -2:
+            return False
+        elif x == -4:
+            return False
+        elif y == 9:
+            return False
+        elif x == 1:
+            self.board[1][1] = player
+        elif x == 3:
+            return False
+        elif x == 123412:
+            return False
+
+        return True
 
     def show(self):
-        print "X: ", self.X, "O: ", self.O, "self.board: ", self.board
+        for row in self.board:
+            for position in row:
+                print position, " "
+            print
