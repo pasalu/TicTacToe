@@ -17,24 +17,10 @@ class Board:
         self.board = self.BLANK_BOARD
 
     def place(self, x, y, player):
-        if x == 0:
-            self.board[0][0] = player
-        elif x == 2:
-            self.board[2][2] = player
-        elif x == -1:
+        if x < 0 or y < 0 or x > 2 or y > 2:
             return False
-        elif y == -2:
-            return False
-        elif x == -4:
-            return False
-        elif y == 9:
-            return False
-        elif x == 1:
-            self.board[1][1] = player
-        elif x == 3:
-            return False
-        elif x == 123412:
-            return False
+
+        self.board[y][x] = player
 
         return True
 
