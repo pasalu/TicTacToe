@@ -52,3 +52,10 @@ class TestBoard():
         result = self.board.place(123412, 123419234, self.board.O)
 
         assert_false(result)
+
+    def test_place_when_already_taken_expect_false(self):
+        self.board.place(1, 2, self.board.O)
+
+        result = self.board.place(1, 2, self.board.X)
+
+        assert_false(result)

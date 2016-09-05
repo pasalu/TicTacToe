@@ -20,6 +20,9 @@ class Board:
         if x < 0 or y < 0 or x > 2 or y > 2:
             return False
 
+        if self.board[y][x] != " ":
+            return False
+
         self.board[y][x] = player
 
         return True
