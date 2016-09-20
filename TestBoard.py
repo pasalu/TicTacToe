@@ -1,5 +1,6 @@
 from Board import *
 from nose.tools import *
+from mock import patch
 
 class TestBoard():
     def setup(self):

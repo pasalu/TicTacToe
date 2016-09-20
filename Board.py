@@ -30,5 +30,5 @@ class Board:
     def show(self):
         for row in self.board:
             for position in row:
-                print position, " "
+                print position,
             print
