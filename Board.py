@@ -2,6 +2,7 @@
 Programmer: Peter Salu
 Created on: July 30, 2016
 """
+import copy
 
 class Board:
     """
@@ -14,7 +15,9 @@ class Board:
     BLANK_BOARD = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
     def __init__(self):
-        self.board = self.BLANK_BOARD
+        # For some odd reason just doing list(Board.BLANK_BOARD) won't create a
+        # deep copy of the list.
+        self.board = copy.deepcopy(Board.BLANK_BOARD)
 
     def place(self, x, y, player):
         if x < 0 or y < 0 or x > 2 or y > 2:
@@ -26,6 +29,9 @@ class Board:
         self.board[y][x] = player
 
         return True
+
+    def has_won(self, player):
+        return False
 
     def show(self):
         for row in self.board:

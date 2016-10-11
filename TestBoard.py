@@ -60,3 +60,27 @@ class TestBoard():
         result = self.board.place(1, 2, self.board.X)
 
         assert_false(result)
+
+    def test_has_won_when_1_1_x_expect_false(self):
+        self.board.place(1, 1, self.board.X)
+
+        result = self.board.has_won(self.board.X)
+
+        assert_false(result)
+
+    def test_has_won_when_all_o_on_top_row_expect_true(self):
+        self.board.place(0, 0, self.board.O)
+        self.board.place(1, 0, self.board.O)
+        self.board.place(2, 0, self.board.O)
+
+        result = self.board.has_won(self.board.O)
+
+        assert_true(result)
+
+    def test_when_modifying_board_blank_board_doesnt_change(self):
+        COPY_OF_BLANK_BOARD = list(self.board.BLANK_BOARD)
+
+        placed_successfully = self.board.place(1, 1, self.board.O)
+
+        assert_true(placed_successfully)
+        assert_equal(COPY_OF_BLANK_BOARD, self.board.BLANK_BOARD)
