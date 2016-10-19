@@ -1,8 +1,3 @@
-"""
-TODO: Remove unnecessary comment.
-Programmer: Peter Salu
-Created on: July 30, 2016
-"""
 import copy
 
 class Board:
