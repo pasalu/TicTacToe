@@ -1,4 +1,5 @@
 """
+TODO: Remove unnecessary comment.
 Programmer: Peter Salu
 Created on: July 30, 2016
 """
@@ -31,7 +32,49 @@ class Board:
         return True
 
     def has_won(self, player):
-        return False
+        # Top row.
+        if (self.board[0][0] == player and
+            self.board[0][1] == player and
+            self.board[0][2] == player):
+            return True
+        # Middle row.
+        elif (self.board[1][0] == player and
+              self.board[1][1] == player and
+              self.board[1][2] == player):
+            return True
+        # Bottom row.
+        elif (self.board[1][0] == player and
+              self.board[1][1] == player and
+              self.board[1][2] == player):
+            return True
+        # Left column.
+        elif (self.board[0][0] == player and
+              self.board[1][0] == player and
+              self.board[2][0] == player):
+            return True
+        # Middle column.
+        elif (self.board[0][1] == player and
+              self.board[1][1] == player and
+              self.board[2][1] == player):
+            return True
+        # Middle column.
+        elif (self.board[0][2] == player and
+              self.board[1][2] == player and
+              self.board[2][2] == player):
+            return True
+        # Left to right diagonal.
+        elif (self.board[0][0] == player and
+              self.board[1][1] == player and
+              self.board[2][2] == player):
+            return True
+        # Right to left diagonal.
+        elif (self.board[0][2] == player and
+              self.board[1][1] == player and
+              self.board[2][0] == player):
+            return True
+        else:
+            return False
+
 
     def show(self):
         for row in self.board:

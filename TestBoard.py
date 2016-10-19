@@ -77,6 +77,15 @@ class TestBoard():
 
         assert_true(result)
 
+    def test_has_won_when_all_x_on_diagonal_expect_true(self):
+        self.board.place(0, 0, self.board.X)
+        self.board.place(1, 1, self.board.X)
+        self.board.place(2, 2, self.board.X)
+
+        result = self.board.has_won(self.board.X)
+
+        assert_true(result)
+
     def test_when_modifying_board_blank_board_doesnt_change(self):
         COPY_OF_BLANK_BOARD = list(self.board.BLANK_BOARD)
 
