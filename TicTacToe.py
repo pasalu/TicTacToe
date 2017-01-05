@@ -1,4 +1,6 @@
 from Board import Board
+from BoardUI import BoardUI
+from Tkinter import *
 
 def parse_input(value):
     pieces = value.split(",")
@@ -9,6 +11,12 @@ def parse_input(value):
 
 def main():
     board = Board()
+    root = Tk()
+    boardUI = BoardUI(root)
+
+    root.mainloop()
+    root.destroy()
+
     print ("Welcome to Tic Tac Toe! We'll be starting you off with 2 player " 
            "mode for now.")
     player = board.X
