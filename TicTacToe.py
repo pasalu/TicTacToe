@@ -12,14 +12,14 @@ def parse_input(value):
 def main():
     board = Board()
     root = Tk()
-    boardUI = BoardUI(root)
+    player = board.X
+    boardUI = BoardUI(root, player)
 
     root.mainloop()
     root.destroy()
 
     print ("Welcome to Tic Tac Toe! We'll be starting you off with 2 player " 
            "mode for now.")
-    player = board.X
 
     while True:
         coordinates = raw_input(player + " player Enter the x, y coordinates "
