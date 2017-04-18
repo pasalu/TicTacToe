@@ -13,7 +13,7 @@ def main():
     board = Board()
     root = Tk()
     player = board.X
-    boardUI = BoardUI(root, player)
+    boardUI = BoardUI(root, board, player)
 
     root.mainloop()
     root.destroy()

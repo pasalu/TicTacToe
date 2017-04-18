@@ -70,7 +70,6 @@ class Board:
         else:
             return False
 
-
     def show(self):
         for row in self.board:
             for position in row:
