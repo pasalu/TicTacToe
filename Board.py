@@ -14,6 +14,7 @@ class Board:
         # For some odd reason just doing list(Board.BLANK_BOARD) won't create a
         # deep copy of the list.
         self.board = copy.deepcopy(Board.BLANK_BOARD)
+        self.player = Board.X
 
     def place(self, x, y, player):
         if x < 0 or y < 0 or x > 2 or y > 2:
@@ -25,6 +26,15 @@ class Board:
         self.board[y][x] = player
 
         return True
+
+    def switch_current_player(self):
+        """
+        Switch the current player from X to O or vice versa.
+        """
+        if self.player == Board.X:
+            self.player = Board.O
+        else:
+            self.player = Board.X
 
     def has_won(self, player):
         # Top row.
