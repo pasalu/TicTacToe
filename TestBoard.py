@@ -92,3 +92,11 @@ class TestBoard():
 
         assert_true(placed_successfully)
         assert_equal(COPY_OF_BLANK_BOARD, self.board.BLANK_BOARD)
+
+    def test_switch_current_player_player_switches(self):
+        old_current_player = self.board.player
+
+        self.board.switch_current_player()
+        new_current_player = self.board.player
+
+        assert_not_equal(old_current_player, new_current_player)
