@@ -26,6 +26,9 @@ class BoardUI:
                 place_partial = partial(self.place, button, x, y)
                 button.config(command=place_partial)
 
+        self.label = Label(master, text=self.board.player + "'s turn")
+        self.label.grid(row=3, column=0, columnspan=3)
+
     def place(self, button, x, y):
         """
         Place a button on the board.
