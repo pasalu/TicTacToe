@@ -26,8 +26,9 @@ class BoardUI:
                 place_partial = partial(self.place, button, x, y)
                 button.config(command=place_partial)
 
-        self.label = Label(master, text=self.board.player + "'s turn")
+        self.label = Label(master)
         self.label.grid(row=3, column=0, columnspan=3)
+        self.set_label()
 
     def place(self, button, x, y):
         """
@@ -39,4 +40,14 @@ class BoardUI:
 
         if self.board.place(x, y, self.board.player):
             button.config(text=self.board.player)
+            self.set_label()
             self.board.switch_current_player()
+
+    def set_label(self):
+        """
+        Display the current player or who has won.
+        """
+        if self.board.has_won(self.board.player):
+            self.label.config(text=self.board.player + " wins!")
+        else:
+            self.label.config(text=self.board.player + "'s turn")
