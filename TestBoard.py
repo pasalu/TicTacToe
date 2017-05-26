@@ -60,6 +60,17 @@ class TestBoard():
 
         assert_false(result)
 
+    def test_place_when_current_player_won_expect_false(self):
+        self.board.place(0, 0, self.board.O)
+        self.board.place(1, 0, self.board.O)
+        self.board.place(2, 0, self.board.O)
+        current_player_has_won = self.board.has_won(self.board.O)
+
+        result = self.board.place(1, 1, self.board.X)
+
+        assert_true(current_player_has_won, "Current player lost")
+        assert_false(result, "Place returned true after player won")
+
     def test_has_won_when_1_1_x_expect_false(self):
         self.board.place(1, 1, self.board.X)
 

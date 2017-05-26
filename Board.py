@@ -17,10 +17,20 @@ class Board:
         self.player = Board.X
 
     def place(self, x, y, player):
+        """
+        Place a player on the board.
+        :param x: The x coordinate of the player.
+        :param y: The y coordinate of the player.
+        :param player: The player.
+        :return: True if placing the player was valid, false otherwise.
+        """
         if x < 0 or y < 0 or x > 2 or y > 2:
             return False
 
         if self.board[y][x] != " ":
+            return False
+
+        if self.has_won(Board.X) or self.has_won(Board.O):
             return False
 
         self.board[y][x] = player
