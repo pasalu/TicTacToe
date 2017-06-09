@@ -37,17 +37,18 @@ class BoardUI:
         :param x: The x coordinate of the button.
         :param y: The y coordinate of the button.
         """
-
         if self.board.place(x, y, self.board.player):
             button.config(text=self.board.player)
-            self.set_label()
             self.board.switch_current_player()
+            self.set_label()
 
     def set_label(self):
         """
         Display the current player or who has won.
         """
-        if self.board.has_won(self.board.player):
-            self.label.config(text=self.board.player + " wins!")
+        if self.board.has_won(self.board.X):
+            self.label.config(text=self.board.X + " wins!")
+        elif self.board.has_won(self.board.O):
+            self.label.config(text=self.board.O + " wins!")
         else:
             self.label.config(text=self.board.player + "'s turn")
