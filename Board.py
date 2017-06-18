@@ -90,6 +90,19 @@ class Board:
         else:
             return False
 
+    def is_tie(self):
+        """
+        A geme is a tie if the board is full.
+
+        :return: True if the game is tied, false otherwise.
+        """
+        for row in self.board:
+            for position in row:
+                if position == " ":
+                    return False
+
+        return True
+
     def show(self):
         for row in self.board:
             for position in row:

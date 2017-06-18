@@ -111,3 +111,34 @@ class TestBoard():
         new_current_player = self.board.player
 
         assert_not_equal(old_current_player, new_current_player)
+
+    def test_is_tie_when_blank_board_expect_false(self):
+        result = self.board.is_tie()
+
+        assert_false(result)
+
+    def test_is_tie_when_full_board_expect_true(self):
+        self.board.place(0, 0, self.board.O)
+        self.board.place(0, 1, self.board.X)
+        self.board.place(0, 2, self.board.O)
+        self.board.place(1, 0, self.board.X)
+        self.board.place(1, 1, self.board.X)
+        self.board.place(1, 2, self.board.O)
+        self.board.place(2, 0, self.board.X)
+        self.board.place(2, 1, self.board.O)
+        self.board.place(2, 2, self.board.X)
+
+        result = self.board.is_tie()
+
+        assert_true(result)
+
+    def test_is_tie_when_x_won_expect_false(self):
+        self.board.place(1, 1, self.board.X)
+        self.board.place(0, 1, self.board.O)
+        self.board.place(2, 0, self.board.X)
+        self.board.place(2, 2, self.board.O)
+        self.board.place(0, 2, self.board.X)
+
+        result = self.board.is_tie()
+
+        assert_false(result)

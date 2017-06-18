@@ -50,5 +50,7 @@ class BoardUI:
             self.label.config(text=self.board.X + " wins!")
         elif self.board.has_won(self.board.O):
             self.label.config(text=self.board.O + " wins!")
+        elif self.board.is_tie():
+            self.label.config(text="It's a tie!")
         else:
             self.label.config(text=self.board.player + "'s turn")
