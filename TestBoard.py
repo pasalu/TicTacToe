@@ -142,3 +142,29 @@ class TestBoard():
         result = self.board.is_tie()
 
         assert_false(result)
+
+    def test_reset_expect_blank_board(self):
+        self.board.place(1, 1, self.board.X)
+        self.board.place(1, 0, self.board.O)
+        self.board.place(2, 2, self.board.X)
+        self.board.reset()
+
+        assert_equal(self.board.board, self.board.BLANK_BOARD)
+
+    def test_reset_expect_current_player_x(self):
+        self.board.place(1, 1, self.board.X)
+        self.board.place(1, 0, self.board.O)
+        self.board.place(2, 2, self.board.X)
+        self.board.reset()
+
+        assert_equal(self.board.player, self.board.X)
+
+    def test_reset_expect_board_same_as_new_board(self):
+        other_board = Board()
+
+        self.board.place(1, 1, self.board.X)
+        self.board.place(1, 0, self.board.O)
+        self.board.place(2, 2, self.board.X)
+        self.board.reset()
+
+        assert_equal(other_board.__dict__, self.board.__dict__)

@@ -18,6 +18,10 @@ class BoardUI:
         """
         self.board = board
 
+        # Being lazy here and just keeping all the buttons in a flat list because we don't need to know their position.
+        self.buttons = []
+
+        # Setup button grid.
         for y in xrange(len(self.board.board)):
             for x in xrange(len(self.board.board[0])):
                 button = Button(master, width=BoardUI.BUTTON_WIDTH)
@@ -26,9 +30,16 @@ class BoardUI:
                 place_partial = partial(self.place, button, x, y)
                 button.config(command=place_partial)
 
+                self.buttons.append(button)
+
+        # Setup status label
         self.label = Label(master)
         self.label.grid(row=3, column=0, columnspan=3)
         self.set_label()
+
+        # Setup reset button
+        self.reset = Button(master, text="RESET", command=self.reset)
+        self.reset.grid(row=4, column=0, columnspan=3)
 
     def place(self, button, x, y):
         """
@@ -54,3 +65,14 @@ class BoardUI:
             self.label.config(text="It's a tie!")
         else:
             self.label.config(text=self.board.player + "'s turn")
+
+    def reset(self):
+        """
+        Reset the board.
+        :return:
+        """
+        self.board.reset()
+        self.set_label()
+
+        for button in self.buttons:
+            button.config(text="")

@@ -11,10 +11,13 @@ class Board:
     BLANK_BOARD = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
     def __init__(self):
-        # For some odd reason just doing list(Board.BLANK_BOARD) won't create a
-        # deep copy of the list.
-        self.board = copy.deepcopy(Board.BLANK_BOARD)
-        self.player = Board.X
+        """
+        Setting board and player to none here to avoid pylint complaining about initialized attributes not in the
+        constructor. The real work happens in reset().
+        """
+        self.board = None
+        self.player = None
+        self.reset()
 
     def place(self, x, y, player):
         """
@@ -108,3 +111,12 @@ class Board:
             for position in row:
                 print position,
             print
+
+    def reset(self):
+        """
+        Reset the state of the board.
+        """
+        # For some odd reason just doing list(Board.BLANK_BOARD) won't create a deep copy of the list.
+        self.board = copy.deepcopy(Board.BLANK_BOARD)
+        self.player = Board.X
+
