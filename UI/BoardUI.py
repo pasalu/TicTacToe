@@ -4,18 +4,22 @@ from functools import partial
 from Board import Board
 
 
-class BoardUI:
+class BoardUI(Frame):
     """
     View for the TicTacToe Board.
     """
     BUTTON_WIDTH = 3
 
-    def __init__(self, master, board):
+    def __init__(self, master, controller, board):
         """
         Initializes the UI.
         :param master: The root of the TK widget.
+        :param controller: The class that handles switching between frames.
         :param Board board: The board model.
         """
+        Frame.__init__(self, master)
+
+        self.controller = controller
         self.board = board
 
         # Being lazy here and just keeping all the buttons in a flat list because we don't need to know their position.
@@ -24,7 +28,7 @@ class BoardUI:
         # Setup button grid.
         for y in xrange(len(self.board.board)):
             for x in xrange(len(self.board.board[0])):
-                button = Button(master, width=BoardUI.BUTTON_WIDTH)
+                button = Button(self, width=BoardUI.BUTTON_WIDTH)
                 button.grid(row=y, column=x)
                 # Using partial here to freeze the value of button because it will be changed in the loop.
                 place_partial = partial(self.place, button, x, y)
@@ -33,12 +37,12 @@ class BoardUI:
                 self.buttons.append(button)
 
         # Setup status label
-        self.label = Label(master)
+        self.label = Label(self)
         self.label.grid(row=3, column=0, columnspan=3)
         self.set_label()
 
         # Setup reset button
-        self.reset = Button(master, text="RESET", command=self.reset)
+        self.reset = Button(self, text="RESET", command=self.reset)
         self.reset.grid(row=4, column=0, columnspan=3)
 
     def place(self, button, x, y):
