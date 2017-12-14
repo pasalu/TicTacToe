@@ -1,5 +1,6 @@
-from Tkinter import *
+from Tkinter import Tk, Frame
 from BoardUI import BoardUI
+from Menu import Menu
 from Board import Board
 
 
@@ -27,10 +28,12 @@ class MainUI(Tk):
         self.frames = {}
 
         self.frames[BoardUI.__name__] = BoardUI(container, self, board)
-
         self.frames[BoardUI.__name__].grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("BoardUI")
+        self.frames[Menu.__name__] = Menu(master=container, controller=self)
+        self.frames[Menu.__name__].grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(BoardUI.__name__)
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
