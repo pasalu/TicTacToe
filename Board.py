@@ -120,3 +120,20 @@ class Board:
         self.board = copy.deepcopy(Board.BLANK_BOARD)
         self.player = Board.X
 
+    def get_actions(self, player):
+        """
+        Get all the valid actions player can make.
+        :param: player
+        :return: A list of boards with player in all the valid positions after one Ply.
+        """
+        actions = []
+
+        for i in range(self.COLUMNS):
+            for j in range(self.ROWS):
+                if self.board[i][j] == " ":
+                    action = copy.deepcopy(self.board)
+                    action[i][j] = player
+                    actions.append(action)
+
+        return actions
+

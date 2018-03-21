@@ -118,15 +118,7 @@ class TestBoard():
         assert_false(result)
 
     def test_is_tie_when_full_board_expect_true(self):
-        self.board.place(0, 0, self.board.O)
-        self.board.place(0, 1, self.board.X)
-        self.board.place(0, 2, self.board.O)
-        self.board.place(1, 0, self.board.X)
-        self.board.place(1, 1, self.board.X)
-        self.board.place(1, 2, self.board.O)
-        self.board.place(2, 0, self.board.X)
-        self.board.place(2, 1, self.board.O)
-        self.board.place(2, 2, self.board.X)
+        self.fill_board()
 
         result = self.board.is_tie()
 
@@ -168,3 +160,39 @@ class TestBoard():
         self.board.reset()
 
         assert_equal(other_board.__dict__, self.board.__dict__)
+
+    def test_get_actions_when_blank_board_expect_9_actions(self):
+        actions = self.board.get_actions(self.board.X)
+
+        assert_equal(9, len(actions))
+
+    def test_get_actions_when_full_board_expect_0_actions(self):
+        self.fill_board()
+
+        actions = self.board.get_actions(self.board.O)
+
+        assert_equal(0, len(actions))
+
+    def test_get_actions_when_blank_board_expect_player_in_all_positions(self):
+        actions = self.board.get_actions(self.board.O)
+
+        assert_equal(self.board.O, actions[0][0][0])
+        assert_equal(self.board.O, actions[1][0][1])
+        assert_equal(self.board.O, actions[2][0][2])
+        assert_equal(self.board.O, actions[3][1][0])
+        assert_equal(self.board.O, actions[4][1][1])
+        assert_equal(self.board.O, actions[5][1][2])
+        assert_equal(self.board.O, actions[6][2][0])
+        assert_equal(self.board.O, actions[7][2][1])
+        assert_equal(self.board.O, actions[8][2][2])
+
+    def fill_board(self):
+        self.board.place(0, 0, self.board.O)
+        self.board.place(0, 1, self.board.X)
+        self.board.place(0, 2, self.board.O)
+        self.board.place(1, 0, self.board.X)
+        self.board.place(1, 1, self.board.X)
+        self.board.place(1, 2, self.board.O)
+        self.board.place(2, 0, self.board.X)
+        self.board.place(2, 1, self.board.O)
+        self.board.place(2, 2, self.board.X)
