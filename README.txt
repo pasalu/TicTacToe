@@ -3,3 +3,9 @@ try out a few things in parallel:
 1. Test Driven Development.
 2. Python GUI's.
 3. AI for games.
+
+To run unit tests:
+nosetest
+
+To run the game itself:
+python TicTacToe.py

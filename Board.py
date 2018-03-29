@@ -131,8 +131,7 @@ class Board:
         for i in range(self.COLUMNS):
             for j in range(self.ROWS):
                 if self.board[i][j] == " ":
-                    action = copy.deepcopy(self.board)
-                    action[i][j] = player
+                    action = (i, j, player)
                     actions.append(action)
 
         return actions

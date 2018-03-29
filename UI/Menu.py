@@ -19,10 +19,13 @@ class Menu(Frame):
         self.multiplayer = Button(self, text="Multiplayer", width=self.BUTTON_WIDTH, command=self.switch_to_multiplayer)
         self.multiplayer.grid(column=0, row=0)
 
-        self.a_star_ai = Button(self, text="A* ai", width=self.BUTTON_WIDTH)
-        self.a_star_ai.grid(column=0, row=1)
+        self.random_ai = Button(self, text="Versus Random AI", width=self.BUTTON_WIDTH)
+        self.random_ai.grid(column=0, row=1)
+
+        self.a_star_ai = Button(self, text="Versus A* AI", width=self.BUTTON_WIDTH)
+        self.a_star_ai.grid(column=0, row=2)
 
     def switch_to_multiplayer(self):
-        class_name = BoardUI.__name__.split('.')[-1] # module.class_name
+        class_name = BoardUI.__name__.split('.')[-1]  # module.class_name
         self.controller.show_frame(class_name)
 

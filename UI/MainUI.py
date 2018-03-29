@@ -33,7 +33,7 @@ class MainUI(Tk):
         self.frames[Menu.__name__] = Menu(master=container, controller=self)
         self.frames[Menu.__name__].grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(BoardUI.__name__)
+        self.show_frame(Menu.__name__)
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]

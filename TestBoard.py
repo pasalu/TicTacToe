@@ -176,15 +176,15 @@ class TestBoard():
     def test_get_actions_when_blank_board_expect_player_in_all_positions(self):
         actions = self.board.get_actions(self.board.O)
 
-        assert_equal(self.board.O, actions[0][0][0])
-        assert_equal(self.board.O, actions[1][0][1])
-        assert_equal(self.board.O, actions[2][0][2])
-        assert_equal(self.board.O, actions[3][1][0])
-        assert_equal(self.board.O, actions[4][1][1])
-        assert_equal(self.board.O, actions[5][1][2])
-        assert_equal(self.board.O, actions[6][2][0])
-        assert_equal(self.board.O, actions[7][2][1])
-        assert_equal(self.board.O, actions[8][2][2])
+        assert_equal((0, 0, self.board.O), actions[0])
+        assert_equal((0, 1, self.board.O), actions[1])
+        assert_equal((0, 2, self.board.O), actions[2])
+        assert_equal((1, 0, self.board.O), actions[3])
+        assert_equal((1, 1, self.board.O), actions[4])
+        assert_equal((1, 2, self.board.O), actions[5])
+        assert_equal((2, 0, self.board.O), actions[6])
+        assert_equal((2, 1, self.board.O), actions[7])
+        assert_equal((2, 2, self.board.O), actions[8])
 
     def fill_board(self):
         self.board.place(0, 0, self.board.O)
