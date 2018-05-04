@@ -1,5 +1,6 @@
 import copy
 
+
 class Board:
     """
     Holds the state for the tic tac toe board.
@@ -17,6 +18,7 @@ class Board:
         """
         self.board = None
         self.player = None
+        self.is_multiplayer = False
         self.reset()
 
     def place(self, x, y, player):
@@ -120,19 +122,23 @@ class Board:
         self.board = copy.deepcopy(Board.BLANK_BOARD)
         self.player = Board.X
 
-    def get_actions(self, player):
+    def get_actions(self):
         """
-        Get all the valid actions player can make.
-        :param: player
+        Get all the valid actions the current player can make.
         :return: A list of boards with player in all the valid positions after one Ply.
         """
         actions = []
 
-        for i in range(self.COLUMNS):
-            for j in range(self.ROWS):
-                if self.board[i][j] == " ":
-                    action = (i, j, player)
+        for y in range(self.COLUMNS):
+            for x in range(self.ROWS):
+                if self.board[y][x] == " ":
+                    action = (x, y, self.player)
                     actions.append(action)
 
         return actions
 
+    def set_is_multiplayer(self, is_multiplayer):
+        """
+        :param bool is_multiplayer:
+        """
+        self.is_multiplayer = is_multiplayer

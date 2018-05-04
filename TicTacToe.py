@@ -3,8 +3,7 @@ from UI.MainUI import MainUI
 
 
 def main():
-    board = Board()
-    ui = MainUI(board)
+    ui = MainUI()
 
     ui.mainloop()
     ui.destroy()

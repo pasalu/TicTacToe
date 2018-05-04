@@ -12,20 +12,22 @@ class BoardUI(Frame):
     BUTTON_WIDTH = 20
     BUTTON_HEIGHT = 9
 
-    def __init__(self, master, controller, board):
+    def __init__(self, master, controller, board, ai):
         """
         Initializes the UI.
         :param master: The root of the TK widget.
         :param controller: The class that handles switching between frames.
         :param Board board: The board model.
+        :param ai: The ai module.
         """
         Frame.__init__(self, master)
 
         self.controller = controller
         self.board = board
+        self.ai = ai
 
         # Being lazy here and just keeping all the buttons in a flat list because we don't need to know their position.
-        self.buttons = []
+        self.buttons = [[], [], []]
 
         button_font = tkFont.Font(size=12)
 
@@ -38,7 +40,7 @@ class BoardUI(Frame):
                 place_partial = partial(self.place, button, x, y)
                 button.config(command=place_partial)
 
-                self.buttons.append(button)
+                self.buttons[y].append(button)
 
         # Setup status label
         self.label = Label(self)
@@ -61,6 +63,18 @@ class BoardUI(Frame):
             self.board.switch_current_player()
             self.set_label()
 
+            if not self.board.is_multiplayer:
+                actions = self.board.get_actions()
+                action = self.ai.take_action(actions)
+                (ai_x, ai_y, ai_player) = action
+
+                self.board.place(ai_x, ai_y, ai_player)
+                ai_button = self.buttons[ai_y][ai_x]
+                ai_button.config(text=self.board.player)
+
+                self.board.switch_current_player()
+                self.set_label()
+
     def set_label(self):
         """
         Display the current player or who has won.
@@ -82,5 +96,6 @@ class BoardUI(Frame):
         self.board.reset()
         self.set_label()
 
-        for button in self.buttons:
-            button.config(text="")
+        for row in self.buttons:
+            for button in row:
+                button.config(text="")

@@ -1,5 +1,6 @@
 from Tkinter import Frame, Button
 import BoardUI
+from AI import AI
 
 
 class Menu(Frame):
@@ -16,16 +17,24 @@ class Menu(Frame):
         self.master = master
         self.controller = controller
 
-        self.multiplayer = Button(self, text="Multiplayer", width=self.BUTTON_WIDTH, command=self.switch_to_multiplayer)
+        self.multiplayer = Button(
+            self,
+            text="Multiplayer",
+            width=self.BUTTON_WIDTH,
+            command=lambda: self.select_mode(None)
+        )
         self.multiplayer.grid(column=0, row=0)
 
-        self.random_ai = Button(self, text="Versus Random AI", width=self.BUTTON_WIDTH)
+        self.random_ai = Button(
+            self,
+            text="Versus Random AI",
+            width=self.BUTTON_WIDTH,
+            command=lambda: self.select_mode(AI.RANDOM))
         self.random_ai.grid(column=0, row=1)
 
         self.a_star_ai = Button(self, text="Versus A* AI", width=self.BUTTON_WIDTH)
         self.a_star_ai.grid(column=0, row=2)
 
-    def switch_to_multiplayer(self):
+    def select_mode(self, ai_strategy):
         class_name = BoardUI.__name__.split('.')[-1]  # module.class_name
-        self.controller.show_frame(class_name)
-
+        self.controller.show_frame(class_name, ai_strategy)

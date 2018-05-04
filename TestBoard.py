@@ -162,29 +162,37 @@ class TestBoard():
         assert_equal(other_board.__dict__, self.board.__dict__)
 
     def test_get_actions_when_blank_board_expect_9_actions(self):
-        actions = self.board.get_actions(self.board.X)
+        actions = self.board.get_actions()
 
         assert_equal(9, len(actions))
 
     def test_get_actions_when_full_board_expect_0_actions(self):
         self.fill_board()
 
-        actions = self.board.get_actions(self.board.O)
+        actions = self.board.get_actions()
 
         assert_equal(0, len(actions))
 
     def test_get_actions_when_blank_board_expect_player_in_all_positions(self):
-        actions = self.board.get_actions(self.board.O)
+        actions = self.board.get_actions()
 
-        assert_equal((0, 0, self.board.O), actions[0])
-        assert_equal((0, 1, self.board.O), actions[1])
-        assert_equal((0, 2, self.board.O), actions[2])
-        assert_equal((1, 0, self.board.O), actions[3])
-        assert_equal((1, 1, self.board.O), actions[4])
-        assert_equal((1, 2, self.board.O), actions[5])
-        assert_equal((2, 0, self.board.O), actions[6])
-        assert_equal((2, 1, self.board.O), actions[7])
-        assert_equal((2, 2, self.board.O), actions[8])
+        assert_equal((0, 0, self.board.X), actions[0])
+        assert_equal((1, 0, self.board.X), actions[1])
+        assert_equal((2, 0, self.board.X), actions[2])
+        assert_equal((0, 1, self.board.X), actions[3])
+        assert_equal((1, 1, self.board.X), actions[4])
+        assert_equal((2, 1, self.board.X), actions[5])
+        assert_equal((0, 2, self.board.X), actions[6])
+        assert_equal((1, 2, self.board.X), actions[7])
+        assert_equal((2, 2, self.board.X), actions[8])
+
+    def test_get_actions_when_space_occupied_expect_not_in_list(self):
+        self.board.place(0, 2, self.board.X)
+
+        actions = self.board.get_actions()
+        is_occupied_space_in_board = (0, 2, self.board.X) in actions
+
+        assert_false(is_occupied_space_in_board)
 
     def fill_board(self):
         self.board.place(0, 0, self.board.O)
